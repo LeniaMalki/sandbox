@@ -1,0 +1,31 @@
+name: PR Validation - IP Groups and FWRCG
+
+on:
+  pull_request:
+    branches:
+      - main  # Or any other target branch
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  validate_ip_groups:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate Bicep file (IP Groups)
+        run: echo "Validating IP Groups"
+
+  validate_fwrcg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate Bicep file (FWRCG)
+        run: echo "Validating FWRCG"
