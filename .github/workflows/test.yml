@@ -23,6 +23,7 @@ jobs:
 
   # Job 2: Run on merge to main branch
   merge_to_main_job:
+    needs: pull_request_job
     if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
     runs-on: ubuntu-latest
     steps:
