@@ -1,0 +1,17 @@
+name: Workflow 1
+
+# Trigger workflow on push or pull request to main branch
+on:
+  push:
+    branches:
+      - main
+
+# Define the jobs to be run
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - run: echo "hello"
