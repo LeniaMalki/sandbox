@@ -15,6 +15,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run dependent tasks
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifact
+
+      - name: Read variable from artifact
+        id: read_var
         run: |
-          echo "Workflow 1 succeeded. Running Workflow 2 tasks..."
+          my_variable=$(cat my_variable.txt)
+          echo "my_variable=${my_variable}"
+          echo "my_variable=$my_variable" >> $GITHUB_ENV  # Set it as an environment variable
+
+      - name: Use variable
+        run: |
+          echo "The variable from Workflow 1 is: $my_variable"
