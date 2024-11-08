@@ -1,16 +1,13 @@
 name: Deploy IP Groups and FWRCG (After PR Approval)
 
 on:
-  workflow_run:
-    workflows: ["PR Validation - IP Groups and FWRCG"]
-    types:
-      - completed
+  push:
+    branches:
+        main
 
 jobs:
   deploy_ip_groups:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,7 +18,6 @@ jobs:
 
   deploy_fwrcg:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     needs: deploy_ip_groups
 
     steps:

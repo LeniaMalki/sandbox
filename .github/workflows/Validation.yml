@@ -1,9 +1,7 @@
 name: PR Validation - IP Groups and FWRCG
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
   validate_ip_groups:
