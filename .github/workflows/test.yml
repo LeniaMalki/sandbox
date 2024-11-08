@@ -1,0 +1,35 @@
+name: PR and Merge Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - main
+
+jobs:
+  # Job 1: Run on pull request creation or update
+  pull_request_job:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run tests for pull request
+        run: |
+          echo "Running tests on pull request..."
+          # Add your testing commands here
+
+  # Job 2: Run on merge to main branch
+  merge_to_main_job:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production..."
+          # Add your deployment or post-merge commands here
