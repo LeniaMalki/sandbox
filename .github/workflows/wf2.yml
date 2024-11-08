@@ -23,12 +23,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Read variable from artifact
-        id: read_var
         run: |
           my_variable=$(cat my_variable.txt)
-          echo "my_variable=${my_variable}"
-          echo "my_variable=$my_variable" >> $GITHUB_ENV  # Set it as an environment variable
-
-      - name: Use variable
-        run: |
-          echo "The variable from Workflow 1 is: $my_variable"
+          echo "Content of artifact: ${my_variable}"
