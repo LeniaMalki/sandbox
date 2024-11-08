@@ -1,0 +1,74 @@
+name: IP Groups and Firewall Configuration Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Step 1: Validate IP Groups
+  validate-ip-groups:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate IP Groups
+        run: |
+          echo "Validating IP groups..."
+
+  # Step 2: Manual Approval to Deploy IP Groups
+  approve-ip-groups:
+    needs: validate-ip-groups
+    runs-on: ubuntu-latest
+    environment:
+      name: ip-groups
+    steps:
+      - name: Approval step (IP Groups)
+        run: echo "Waiting for approval..."
+
+  # Step 3: Deploy IP Groups
+  deploy-ip-groups:
+    needs: approve-ip-groups
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy IP Groups
+        run: |
+          echo "Deploying IP groups..."
+
+  # Step 4: Validate Firewall Configuration (fwrcg)
+  validate-fwrcg:
+    needs: deploy-ip-groups
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate Firewall Configuration
+        run: |
+          echo "Validating Firewall Configuration..."
+
+  # Step 5: Manual Approval to Deploy Firewall Configuration
+  approve-fwrcg:
+    needs: validate-fwrcg
+    runs-on: ubuntu-latest
+    environment:
+      name: 'fwrcg'
+    steps:
+      - name: Approval step (Firewall Configuration)
+        run: echo "Waiting for approval..."
+
+  # Step 6: Deploy Firewall Configuration
+  deploy-fwrcg:
+    needs: approve-fwrcg
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Firewall Configuration
+        run: |
+          echo "Deploying Firewall Configuration..."
