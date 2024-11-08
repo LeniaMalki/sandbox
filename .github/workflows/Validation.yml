@@ -2,12 +2,6 @@ name: PR Validation - IP Groups and FWRCG
 
 on:
   pull_request:
-    branches:
-      - main  # Or any other target branch
-    types:
-      - opened
-      - synchronize
-      - reopened
 
 jobs:
   validate_ip_groups:
