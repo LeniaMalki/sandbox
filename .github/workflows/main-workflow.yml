@@ -1,0 +1,21 @@
+name: Main Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+concurrency:
+  group: deployment
+  cancel-in-progress: false
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Put into sleep
+        run: |
+            echo "Going into sleep..."
+            sleep(60)
+            echo "Woke up from sleep."
