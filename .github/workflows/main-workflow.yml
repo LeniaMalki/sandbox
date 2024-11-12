@@ -3,6 +3,7 @@ name: Main Workflow
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
+  workflow_dispatch:
 
 concurrency:
   group: deployment
